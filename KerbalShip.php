@@ -28,13 +28,24 @@ class KerbalShip {
     }
     public function loadMeta(&$string) {
         $arr = explode("\n",$string);
-        var_dump($arr[0]);
-        preg_match('/\s+ = (\s+)/',$arr[0],$match);
-        var_dump($match);
+  //      var_dump($arr[0]);
+        preg_match('/(\w+) = ([\w\W]+)/',$arr[0],$match);
+$this->ship = $match[2];
+preg_match('/(\w+) = ([\.\d]+)/',$arr[1],$match);
+//var_dump($match);
+$this->version = $match[2];
+preg_match('/(\w+) = ([\w]+)/',$arr[2],$match);
+//var_dump($match);
+$this->type = $match[2];
+echo $this;
         for($i = 0; $i != 3; $i++)
             unset($arr[0]);
         return implode("\n",$arr);
     }
+public function __toString()
+{
+return $this->ship.' '.$this->version.' '.$this->type;
+}
 }
 
 ?>
